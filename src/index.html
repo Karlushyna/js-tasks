@@ -7,10 +7,22 @@
     <title>start</title>
   </head>
   <body>
-    <input type="text" id="search-box" />
-    <ul class="country-list"></ul>
-    <div class="country-info"></div>
+    <form class="my-form">
+      <label>
+        <span>Text</span>
+        <input
+          class="text-input"
+          type="text"
+          name="text"
+          placeholder="Enter text..."
+        />
+      </label>
 
-    <script src="./index.js" type="module"></script>
+      <button class="btn success" type="submit">+ Add</button>
+    </form>
+
+    <ul class="list"></ul>
+
+    <!-- <script src="./index.js" type="module"></script> -->
   </body>
 </html>
