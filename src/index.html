@@ -4,12 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 10</title>
+    <title>Pre-start</title>
   </head>
   <body>
-    <input type="text" id="search-box" />
-    <ul class="country-list"></ul>
-    <div class="country-info"></div>
+    <style>
+      .list{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        padding: 10px;
+        margin: 0;
+      }
+      .item{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid gray;
+        padding: 10px;
+      }
+    </style>
+    <form>
+      <label>
+        <span>Text</span>
+        <input type="text" />
+      </label>
+      <button type="submit">+ Add</button>
+    </form>
+
+    <ul class="list"></ul>
 
     <script src="index.js" type="module"></script>
   </body>
