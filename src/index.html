@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pre-start</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.0/basicLightbox.min.css" />
   </head>
   <body>
     <style>
@@ -22,17 +24,27 @@
         border: 1px solid gray;
         padding: 10px;
       }
+      .link{
+      color: magenta;
+      font-weight: bold;
+      font-size: 24px;  
+      }
     </style>
-    <form>
+    <form class="form">
       <label>
         <span>Text</span>
-        <input type="text" />
+        <input type="text" name="text" placeholder = "enter text.."/>
       </label>
       <button type="submit">+ Add</button>
     </form>
 
+
+    
     <ul class="list"></ul>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.0/basicLightbox.min.js"></script>
     <script src="index.js" type="module"></script>
   </body>
 </html>
