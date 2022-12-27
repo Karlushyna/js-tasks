@@ -4,10 +4,36 @@ import * as basicLightbox from 'basiclightbox';
 import { v4 } from 'uuid';
 
 import { getItemTemplate } from './getItemTemplate.js';
-import { items as importedItems } from './items.js';
+// import { items as importedItems } from './items.js';
 
 import 'basiclightbox/dist/basicLightbox.min.css';
-import './style.css';
+import './css/styles.css';
+
+const createTodo = payload => {
+localStorage.setItem('todos', JSON.stringify(payload));
+};
+
+const fetchTodos = () => {
+  try{
+    return JSON.parse(localStorage.getItem('todos'));
+
+  } catch(error) {
+    console.log("can't load todos" );
+    return [];
+  }
+
+  return data || [];
+}
+
+const updateTodo = payload => {
+  localStorage.setItem('todos', JSON.stringify(payload));
+
+}
+
+const deleteTodo = payload => {
+  localStorage.setItem('todos', JSON.stringify(payload));
+
+}
 
 const modal = basicLightbox.create(`
   <div class="modal">
@@ -16,7 +42,8 @@ const modal = basicLightbox.create(`
   </div>
 `);
 
-let items = importedItems;
+// let items = importedItems;
+let items = [];
 
 const refs = {
   list: document.querySelector('.list'),
@@ -32,23 +59,29 @@ const render = () => {
   refs.list.insertAdjacentHTML('beforeend', lis.join(''));
 };
 
-const addItem = text => {
-  const payload = {
-    id: v4(),
-    text,
-    isDone: false,
-    created: new Date(),
-  };
+const addItem = item => {
+  // const payload = {
+  //   id: v4(),
+  //   text,
+  //   isDone: false,
+  //   created: new Date(),
+  // };
 
-  items.push(payload);
+  items.push(item);
 };
 
 const handleSubmit = e => {
   // const value = e.target.elements.text.value;
   const { value } = e.target.elements.text;
-
+  const payload = {
+    id: v4(),
+    text: value,
+    isDone: false,
+    created: new Date(),
+  };
   e.preventDefault();
-  addItem(value);
+  addItem(payload);
+  createTodo(items);
   render();
   refs.form.reset();
 };
@@ -62,6 +95,7 @@ const toggleItem = id => {
         }
       : item,
   );
+  updateTodo(items);
 };
 
 const viewItem = id => {
@@ -73,6 +107,7 @@ const viewItem = id => {
 
 const deleteItem = id => {
   items = items.filter(item => item.id !== id);
+  deleteTodo(items);
   render();
 };
 
@@ -104,7 +139,12 @@ const handleKeyPress = ({ code }) => {
   }
 };
 
+const loadData = () => {
+  items = fetchTodos();
+}
+
 // run
+loadData();
 render();
 
 // add event listeners
