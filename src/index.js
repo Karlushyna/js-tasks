@@ -1,39 +1,18 @@
 // 
 
 import * as basicLightbox from 'basiclightbox';
+import toastr  from 'toastr';
 import { v4 } from 'uuid';
 
 import { getItemTemplate } from './getItemTemplate.js';
 // import { items as importedItems } from './items.js';
 
+import './configToastr';
+import 'toastr/build/toastr.min.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import './css/styles.css';
 
-const createTodo = payload => {
-localStorage.setItem('todos', JSON.stringify(payload));
-};
-
-const fetchTodos = () => {
-  try{
-    return JSON.parse(localStorage.getItem('todos'));
-
-  } catch(error) {
-    console.log("can't load todos" );
-    return [];
-  }
-
-  return data || [];
-}
-
-const updateTodo = payload => {
-  localStorage.setItem('todos', JSON.stringify(payload));
-
-}
-
-const deleteTodo = payload => {
-  localStorage.setItem('todos', JSON.stringify(payload));
-
-}
+import {createTodo, fetchTodos, updateTodo, deleteTodo} from './todosApi';
 
 const modal = basicLightbox.create(`
   <div class="modal">
@@ -84,6 +63,8 @@ const handleSubmit = e => {
   createTodo(items);
   render();
   refs.form.reset();
+  toastr.success('Todo created successfully');
+
 };
 
 const toggleItem = id => {
@@ -109,6 +90,8 @@ const deleteItem = id => {
   items = items.filter(item => item.id !== id);
   deleteTodo(items);
   render();
+  toastr.success('Todo deleted successfully');
+
 };
 
 const handleListClick = e => {
@@ -152,3 +135,4 @@ refs.form.addEventListener('submit', handleSubmit);
 refs.list.addEventListener('click', handleListClick);
 refs.modalButton.addEventListener('click', modal.close);
 window.addEventListener('keydown', handleKeyPress);
+
