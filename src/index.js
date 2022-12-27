@@ -38,16 +38,7 @@ const render = () => {
   refs.list.insertAdjacentHTML('beforeend', lis.join(''));
 };
 
-const addItem = item => {
-  // const payload = {
-  //   id: v4(),
-  //   text,
-  //   isDone: false,
-  //   created: new Date(),
-  // };
 
-  items.push(item);
-};
 
 const handleSubmit = e => {
   // const value = e.target.elements.text.value;
@@ -59,8 +50,8 @@ const handleSubmit = e => {
     created: new Date(),
   };
   e.preventDefault();
-  addItem(payload);
-  createTodo(items);
+    createTodo(items);
+    items.push(payload);
   render();
   refs.form.reset();
   toastr.success('Todo created successfully');
